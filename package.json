@@ -1,6 +1,6 @@
 {
   "name": "symmetrix",
-  "version": "0.2.20",
+  "version": "0.3.0",
   "type": "module",
   "description": "A lightweight Sass-based CSS framework with practical utility classes",
   "main": "./src/symmetrix.scss",

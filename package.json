@@ -19,6 +19,9 @@
   "scripts": {
     "example": "sass example/style.scss example/style.css --watch"
   },
+  "devDependencies": {
+    "sass": "^1.97.3"
+  },
   "keywords": [
     "sass",
     "scss",
@@ -27,7 +30,12 @@
     "framework"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "sass": "^1.97.3"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kabledev/symmetrix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kabledev/symmetrix/issues"
+  },
+  "homepage": "https://github.com/kabledev/symmetrix#readme"
 }

@@ -1,0 +1,98 @@
+@use "sass:map";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+// Align Items (ai)
+@include generate-utility(
+  align-items,
+  ai,
+  (
+    center: center,
+    start: flex-start,
+    end: flex-end,
+    stretch: stretch,
+    baseline: baseline,
+  )
+);
+
+// Justify Content (jc)
+@include generate-utility(
+  justify-content,
+  jc,
+  (
+    center: center,
+    start: flex-start,
+    end: flex-end,
+    between: space-between,
+    around: space-around,
+    evenly: space-evenly,
+  )
+);
+
+// Flex Direction (fd)
+@include generate-utility(
+  flex-direction,
+  fd,
+  (
+    row: row,
+    row-reverse: row-reverse,
+    col: column,
+    col-reverse: column-reverse,
+  )
+);
+
+// Flex Wrap (fw)
+@include generate-utility(
+  flex-wrap,
+  fw,
+  (
+    nowrap: nowrap,
+    wrap: wrap,
+    wrap-reverse: wrap-reverse,
+  )
+);
+
+// Align Self (as)
+@include generate-utility(
+  align-self,
+  as,
+  (
+    center: center,
+    start: flex-start,
+    end: flex-end,
+    stretch: stretch,
+    baseline: baseline,
+  )
+);
+
+// Flex Grow (fg)
+@include generate-utility(
+  flex-grow,
+  fg,
+  (
+    0: 0,
+    1: 1,
+  )
+);
+
+// Flex Shrink (fs)
+@include generate-utility(
+  flex-shrink,
+  fs,
+  (
+    0: 0,
+    1: 1,
+  )
+);
+@include generate-utility(
+  flex,
+  flex,
+  (
+    0: 0,
+    1: 1,
+    "auto": 0 0 auto,
+  )
+);
+
+// Gap
+@include generate-utility(gap, gap, $spaces);

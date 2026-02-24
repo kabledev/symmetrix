@@ -1,0 +1,43 @@
+@use "sass:map";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+$text-shadow-list: (
+  "sm": 0 2px 8px rgba(0, 0, 0, 0.08),
+  "md": 0 5px 15px rgba(0, 0, 0, 0.08),
+  "lg": 0 3px 4px rgba(0, 0, 0, 0.25),
+  "xl": 0 4px 6px rgba(0, 0, 0, 0.3),
+  "none": none,
+) !default;
+
+$shadow-list: (
+  "sm": 0 1px 3px rgba(0, 0, 0, 0.12),
+  "md": 0 4px 6px rgba(0, 0, 0, 0.1),
+  "lg": 0 10px 15px rgba(0, 0, 0, 0.1),
+  "xl": 0 20px 25px rgba(0, 0, 0, 0.12),
+) !default;
+
+@each $size, $shadow in $shadow-list {
+  .shadow#{$del + $size} {
+    box-shadow: $shadow;
+  }
+
+  .hover#{$delBp}shadow#{$del + $size}:hover {
+    box-shadow: $shadow;
+  }
+
+  .focus\:shadow-#{$size}:focus {
+    box-shadow: $shadow;
+  }
+}
+
+@each $size, $shadow in $text-shadow-list {
+  .text-shadow#{$del + $size} {
+    text-shadow: $shadow;
+  }
+
+  // Hover variants
+  .hover#{$delBp}text-shadow#{$del + $size}:hover {
+    text-shadow: $shadow;
+  }
+}

@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "./vars" as *;
+
+@mixin breakpoint($bp-name) {
+  @if map.has-key($breakpoints, $bp-name) {
+    $bp-value: map.get($breakpoints, $bp-name);
+    @media (min-width: $bp-value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$bp-name}' is not defined in $breakpoints map.";
+  }
+}
+
+@mixin generate-utility($property, $class-prefix: null, $values) {
+  $prefix: "";
+  @if $class-prefix != null and $class-prefix != "" {
+    $prefix: $class-prefix + $del;
+  }
+
+  @each $key, $value in $values {
+    .#{$prefix}#{$key} {
+      #{$property}: $value;
+      @if ($property == "gap") {
+        --#{$pfx}-gap: #{$value};
+      }
+    }
+  }
+
+  @each $bp-name, $bp-value in $breakpoints {
+    @include breakpoint($bp-name) {
+      @each $key, $value in $values {
+        .#{$bp-name}\@#{$prefix}#{$key} {
+          #{$property}: $value;
+          @if ($property == "gap") {
+            --#{$pfx}-gap: #{$value};
+          }
+        }
+      }
+    }
+  }
+}

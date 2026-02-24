@@ -1,0 +1,32 @@
+@use "sass:map";
+@use "sass:math";
+
+@use "../src/abstracts/vars" with (
+  $theming: (
+    fontFamily: (
+      "Roboto, sans-serif",
+    ),
+    fontSize: 1rem,
+    lineHeight: 1.25,
+
+    colorScheme: (
+      light: (
+        bgColor: white,
+        textColor: var(--sym-gray-800),
+        headingColor: var(--sym-gray-950),
+        borderColor: var(--sym-gray-200),
+      ),
+      dark: (
+        bgColor: var(--sym-gray-950),
+        textColor: var(--sym-gray-100),
+        headingColor: white,
+        borderColor: var(--sym-gray-800),
+      ),
+    ),
+  )
+);
+
+@forward "../src/base";
+@forward "../src/layout";
+@forward "../src/elements";
+@forward "../src/utils";

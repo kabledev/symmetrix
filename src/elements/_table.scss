@@ -1,0 +1,32 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:string";
+@use "sass:meta";
+@use "../abstracts/vars" as *;
+@use "../abstracts/colors" as *;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  th,
+  td {
+    text-align: left;
+    padding: map.get($spaces, "1h") 0;
+  }
+  &.listed {
+    th,
+    td {
+      text-align: left;
+      padding: map.get($spaces, "3");
+      border-bottom: 1px solid var(--#{$pfx}-border-color);
+    }
+
+    tr {
+      &:last-child {
+        td {
+          border: none;
+        }
+      }
+    }
+  }
+}

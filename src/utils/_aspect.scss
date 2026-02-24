@@ -1,0 +1,31 @@
+@use "sass:map";
+@use "sass:math";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+// Aspect ratio utility classes
+@each $name, $ratio in $aspect-list {
+  .aspect#{$del + $name} {
+    aspect-ratio: $ratio;
+
+    // Optional: Ensure content fills the container
+    & > img,
+    & > video,
+    & > iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// Responsive variants
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    @each $name, $ratio in $aspect-list {
+      .#{$breakpoint + $delBp}aspect#{$del + $name} {
+        aspect-ratio: #{$ratio};
+      }
+    }
+  }
+}

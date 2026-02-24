@@ -1,0 +1,165 @@
+@use "sass:map";
+@use "./abstracts/vars" as *;
+
+// Theme colors
+$lightTheme: map.get(map.get($theming, colorScheme), light);
+$darkTheme: map.get(map.get($theming, colorScheme), dark);
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  border: 0 solid transparent;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sym-bg-color: #{map.get($lightTheme, bgColor)};
+  --sym-text-color: #{map.get($lightTheme, textColor)};
+  --sym-heading-color: #{map.get($lightTheme, headingColor)};
+  --sym-border-color: #{map.get($lightTheme, borderColor)};
+  color-scheme: light;
+  &.dark {
+    --sym-bg-color: #{map.get($darkTheme, bgColor)};
+    --sym-text-color: #{map.get($darkTheme, textColor)};
+    --sym-heading-color: #{map.get($darkTheme, headingColor)};
+    --sym-border-color: #{map.get($darkTheme, borderColor)};
+    color-scheme: dark;
+  }
+  &.system {
+    color-scheme: light dark;
+    @media (prefers-color-scheme: light) {
+      --sym-bg-color: #{map.get($lightTheme, bgColor)};
+      --sym-text-color: #{map.get($lightTheme, textColor)};
+      --sym-heading-color: #{map.get($lightTheme, headingColor)};
+      --sym-border-color: #{map.get($lightTheme, borderColor)};
+    }
+
+    @media (prefers-color-scheme: dark) {
+      --sym-bg-color: #{map.get($darkTheme, bgColor)};
+      --sym-text-color: #{map.get($darkTheme, textColor)};
+      --sym-heading-color: #{map.get($darkTheme, headingColor)};
+      --sym-border-color: #{map.get($darkTheme, borderColor)};
+    }
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: #{map.get($theming, fontFamily)};
+  font-size: map.get($theming, fontSize);
+  font-optical-sizing: auto;
+  font-style: normal;
+  line-height: map.get($theming, lineHeight);
+  background-color: var(--sym-bg-color);
+  color: var(--sym-text-color);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--sym-bg-color);
+  color: var(--sym-text-color);
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.container {
+  &,
+  &-xl,
+  &-wd,
+  &-hd,
+  &-1366,
+  &-1440 {
+    --container-space: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: var(--container-space);
+    padding-right: var(--container-space);
+    max-width: map.get($breakpoints, "xl");
+
+    @media (min-width: map.get($breakpoints, "sm")) {
+      --container-space: 2rem;
+    }
+
+    @media (min-width: map.get($breakpoints, "md")) {
+      --container-space: 3rem;
+    }
+    @media (min-width: map.get($breakpoints, "xl")) {
+      --container-space: 2rem;
+    }
+  }
+
+  &-xl {
+    max-width: map.get($breakpoints, "xl");
+  }
+  &-wd {
+    max-width: map.get($breakpoints, "wd");
+  }
+  &-hd {
+    max-width: map.get($breakpoints, "hd");
+  }
+
+  ///
+  &-1366 {
+    max-width: 1366px;
+  }
+  &-1440 {
+    max-width: 1440px;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b,
+.heading {
+  font-weight: 500;
+  color: var(--sym-heading-color);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  &.listed {
+    list-style: inside;
+  }
+}
+
+hr {
+  height: 1px;
+  margin: 0.75rem 0;
+  background: var(--sym-border-color);
+}

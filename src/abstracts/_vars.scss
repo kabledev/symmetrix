@@ -1,0 +1,271 @@
+@use "sass:map";
+@use "sass:math";
+@use "./functions" as *;
+@use "./colors" as *;
+
+$pfx: "sym" !default;
+$del: "\\\:" !default;
+$delBp: "\\\@" !default;
+
+$theming: (
+  fontFamily: (
+    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+  ),
+  fontSize: 1rem,
+  lineHeight: 1.25,
+
+  colorScheme: (
+    light: (
+      bgColor: white,
+      textColor: map.get(map.get($colors, "gray"), 800),
+      headingColor: map.get(map.get($colors, "gray"), 950),
+      borderColor: map.get(map.get($colors, "gray"), 200),
+    ),
+    dark: (
+      bgColor: map.get(map.get($colors, "gray"), 950),
+      textColor: map.get(map.get($colors, "gray"), 100),
+      headingColor: white,
+      borderColor: map.get(map.get($colors, "gray"), 800),
+    ),
+  ),
+) !default;
+
+$breakpoints: (
+  xs: 480px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  wd: 1536px,
+  hd: 1920px,
+) !default;
+
+//$spaces: make-spaces(8rem);
+$spaces: (
+  "0": "0rem !important",
+  "auto": auto,
+  "h": 0.125rem,
+  "1": 0.25rem,
+  "1h": 0.375rem,
+  "2": 0.5rem,
+  "2h": 0.625rem,
+  "3": 0.75rem,
+  "3h": 0.875rem,
+  "4": 1rem,
+  "4h": 1.125rem,
+  "5": 1.25rem,
+  "5h": 1.375rem,
+  "6": 1.5rem,
+  "6h": 1.625rem,
+  "7": 1.75rem,
+  "7h": 1.875rem,
+  "8": 2rem,
+  ///  + 0.25
+  "8h": 2.25rem,
+  "9": 2.5rem,
+  "9h": 2.75rem,
+  "10": 3rem,
+  "10h": 3.25rem,
+  "11": 3.5rem,
+  "11h": 3.75rem,
+  "12": 4rem,
+  // + 0.5
+  "12h": 4.5rem,
+  "13": 5rem,
+  "13h": 5.5rem,
+  "14": 6rem,
+  "14h": 6.5rem,
+  "15": 7rem,
+  "15h": 7.5rem,
+  "16": 8rem,
+) !default;
+/// Font sizes
+$_dfs: map.get($theming, "fontSize") !default;
+$font_sizes: (
+  "d": $_dfs,
+  "sm": calc(#{$_dfs} - 0.25rem),
+  "h": calc(#{$_dfs} - 0.125rem),
+  "1": calc(#{$_dfs} + 0rem),
+  "1h": calc(#{$_dfs} + 0.125rem),
+  "2": calc(#{$_dfs} + 0.25rem),
+  "2h": calc(#{$_dfs} + 0.375rem),
+  "3": calc(#{$_dfs} + 0.5rem),
+  "3h": calc(#{$_dfs} + 0.625rem),
+  "4": calc(#{$_dfs} + 0.75rem),
+  "4h": calc(#{$_dfs} + 0.875rem),
+  "5": calc(#{$_dfs} + 1rem),
+  // 0.25
+  "5h": calc(#{$_dfs} + 1.25rem),
+  "6": calc(#{$_dfs} + 1.5rem),
+  "6h": calc(#{$_dfs} + 1.75rem),
+  "7": calc(#{$_dfs} + 2rem),
+  "7h": calc(#{$_dfs} + 2.25rem),
+  "8": calc(#{$_dfs} + 2.5rem),
+  "8h": calc(#{$_dfs} + 2.75rem),
+  "9": calc(#{$_dfs} + 3rem),
+  "9h": calc(#{$_dfs} + 3.25rem),
+  "10": calc(#{$_dfs} + 3.5rem),
+  "10h": calc(#{$_dfs} + 3.75rem),
+  "11": calc(#{$_dfs} + 4rem),
+  "11h": calc(#{$_dfs} + 4.25rem),
+  "12": calc(#{$_dfs} + 4.5rem),
+  "12h": calc(#{$_dfs} + 4.75rem),
+  "13": calc(#{$_dfs} + 5rem),
+  "13h": calc(#{$_dfs} + 5.25rem),
+  "14": calc(#{$_dfs} + 5.5rem),
+  "14h": calc(#{$_dfs} + 5.75rem),
+  "15": calc(#{$_dfs} + 6rem),
+  "15h": calc(#{$_dfs} + 6.25rem),
+  "16": calc(#{$_dfs} + 6.5rem),
+  "16h": calc(#{$_dfs} + 6.75rem),
+  "17": calc(#{$_dfs} + 7rem),
+  "17h": calc(#{$_dfs} + 7.25rem),
+  "18": calc(#{$_dfs} + 7.5rem),
+  "18h": calc(#{$_dfs} + 7.75rem),
+  "19": calc(#{$_dfs} + 8rem),
+  "19h": calc(#{$_dfs} + 8.25rem),
+  "20": calc(#{$_dfs} + 8.5rem),
+) !default;
+
+/// border
+$rounds: (
+  ///default 3px
+  "d": 0.188rem,
+  "pill": 9999px,
+  "circle": 50%,
+  "0": 0,
+  "h": 0.125rem,
+  "1": 0.25rem,
+  "1h": 0.375rem,
+  "2": 0.5rem,
+  "2h": 0.625rem,
+  "3": 0.75rem,
+  "3h": 0.875rem,
+  "4": 1rem,
+  "4h": 1.125rem,
+  "5": 1.25rem,
+  "5h": 1.375rem,
+  "6": 1.5rem,
+  "6h": 1.625rem,
+  "7": 1.75rem,
+  "7h": 1.875rem,
+  "8": 2rem,
+  "8h": 2.125rem,
+  "9": 2.25rem,
+  "9h": 2.375rem,
+  "10": 2.5rem,
+  "10h": 2.625rem,
+  "11": 2.75rem,
+  "11h": 2.875rem,
+  "12": 3rem
+) !default;
+
+$box-sizes: (
+  // lines
+  "line-1": 0.063rem,
+  "line-1h": 0.094rem,
+  "line-2": 0.125rem,
+  "line-2h": 0.156rem,
+  "line-3": 0.188rem,
+  "line-3h": 0.219rem,
+  "line-4": 0.25rem,
+  // dots
+  "dot-1": 0.375rem,
+  "dot-2": 0.5rem,
+  "dot-3": 0.75rem,
+  "dot-4": 1rem,
+  // boxes
+  "box-h": 1.25rem,
+  "box-1": 1.5rem,
+  "box-1h": 1.75rem,
+  "box-2": 2rem,
+  "box-2h": 2.25rem,
+  "box-3": 2.5rem,
+  "box-3h": 2.75rem,
+  "box-4": 3rem,
+  "box-4h": 3.5rem,
+  "box-5": 4rem,
+  "box-5h": 4.5rem,
+  "box-6": 5rem,
+  "box-6h": 5.5rem,
+  "box-7": 6rem,
+  "box-7h": 6.5rem,
+  "box-8": 7rem,
+  "box-8h": 7.5rem,
+  "box-9": 8rem,
+  "box-9h": 8.5rem,
+  "box-10": 9rem,
+  "box-10h": 9.75rem,
+  "box-11": 10.5rem,
+  "box-11h": 11.25rem,
+  "box-12": 12rem,
+  "box-12h": 12.75rem,
+  "box-13": 13.5rem,
+  "box-13h": 14.25rem,
+  "box-14": 15rem,
+  //
+  "box-256": 16rem,
+  "box-320": 20rem,
+  "box-416": 26rem,
+  "box-512": 32rem,
+  "box-640": 40rem,
+  "box-768": 48rem,
+  "box-992": 62rem,
+  "box-1024": 64rem,
+  "box-1200": 75rem,
+  "box-1280": 80rem,
+  "box-1366": 85.375rem,
+  "box-1440": 90rem,
+  "box-1536": 96rem,
+  "box-1600": 100rem
+) !default;
+
+$aspect-list: (
+  "auto": "auto",
+  "square": math.div(1, 1),
+  //
+  "landscape": math.div(16, 9),
+  "wide": math.div(16, 10),
+  "ultrawide": math.div(21, 9),
+  "superwide": math.div(21, 10),
+  "cinema": math.div(2.39, 1),
+  ///
+  "photo": math.div(3, 2),
+  "story": math.div(9, 16),
+  "poster": math.div(2, 3),
+  "card": math.div(4, 5),
+  ///
+  "golden": math.div(1.618, 1),
+  "imax": math.div(1.9, 1),
+  "standard": math.div(4, 3),
+) !default;
+
+$enabled_colors: (
+  "white",
+  "black",
+  "transparent",
+  "current",
+  "base",
+  "red",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+  "pink",
+  "rose",
+  "gray",
+  "slate",
+  "zinc",
+  "neutral",
+  "stone"
+) !default;

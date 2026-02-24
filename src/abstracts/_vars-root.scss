@@ -1,0 +1,19 @@
+@use "sass:meta";
+@use "sass:map";
+@use "./vars" as *;
+@use "./colors" as *;
+
+:root {
+  --sym-gap: 0px;
+
+  @each $key in $enabled_colors {
+    $val: map.get($colors, $key);
+    @if meta.type-of($val) == map {
+      @each $shade, $hex in $val {
+        --#{$pfx + "-" + $key + "-" + $shade}: #{$hex};
+      }
+    } @else {
+      --#{$pfx + "-" + $key}: #{$val};
+    }
+  }
+}

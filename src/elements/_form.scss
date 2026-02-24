@@ -1,0 +1,34 @@
+@use "sass:map";
+@use "../abstracts//colors" as *;
+@use "../abstracts//vars" as *;
+
+input,
+select,
+textarea {
+  border: 1px solid var(--sym-border-color);
+  padding: 0.65rem 0.75rem;
+  border-radius: 3px;
+  outline: none;
+  background-color: transparent;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea,
+button {
+  font-size: map.get($theming, "fontSize");
+  font-family: map.get($theming, "fontFamily");
+}
+
+select {
+  background: var(--sym-bg-color);
+}

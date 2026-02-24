@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "sass:math";
+
+@function make-spaces($limit: 8rem) {
+  $spaces: ();
+  $value: 0rem;
+  $step: 0.125rem;
+  $i: 0;
+
+  @while $value <= $limit {
+    $spaces: map.merge($spaces, ("" + $i: $value));
+    @if $value < 4rem {
+      $step: 0.125rem;
+    } @else if $value < 8rem {
+      $step: 0.25rem;
+    } @else if $value < 12rem {
+      $step: 0.375rem;
+    } @else if $value < 16rem {
+      $step: 0.5rem;
+    } @else if $value < 20rem {
+      $step: 0.625rem;
+    }
+
+    $half-value: $value + $step;
+
+    $x: "";
+    @if $i == 0 {
+      $x: "h";
+    } @else {
+      $x: #{$i + "h"};
+    }
+
+    @if $half-value <= $limit {
+      $spaces: map.merge($spaces, ("" + $x: $half-value));
+    }
+
+    $value: $value + calc($step * 2);
+    $i: $i + 1;
+  }
+
+  @return $spaces;
+}

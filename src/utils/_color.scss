@@ -1,0 +1,90 @@
+/* _colors.scss */
+@use "sass:map";
+@use "sass:meta";
+@use "../abstracts/colors" as *;
+@use "../abstracts/vars" as *;
+
+// Mixin for generating utility classes
+@mixin generate-color-utilities($prefix, $property, $color, $shade, $value) {
+  @if $shade {
+    .#{$prefix + $del + $color + "-" + $shade} {
+      //#{$property}: $value;
+      #{$property}: var(--sym-#{$color}-#{$shade});
+    }
+    .hover#{$delBp + $prefix + $del + $color + "-" + $shade} {
+      &:hover {
+        #{$property}: var(--sym-#{$color}-#{$shade});
+      }
+    }
+    .dark-hover#{$delBp + $prefix + $del + $color + "-" + $shade}:hover {
+      &:is(.dark, .dark *) {
+        #{$property}: var(--sym-#{$color}-#{$shade});
+      }
+    }
+    .active#{$delBp + $prefix + $del + $color + "-" + $shade} {
+      &.active {
+        #{$property}: var(--sym-#{$color}-#{$shade});
+      }
+    }
+    .dark-active#{$delBp + $prefix + $del + $color + "-" + $shade}:is(.dark *) {
+      &.active {
+        #{$property}: var(--sym-#{$color}-#{$shade});
+      }
+    }
+
+    .dark#{$delBp + $prefix + $del + $color + "-" + $shade} {
+      &:is(.dark, .dark *) {
+        #{$property}: var(--sym-#{$color}-#{$shade});
+      }
+    }
+  } @else {
+    .#{$prefix + $del + $color} {
+      //#{$property}: $value;
+      #{$property}: var(--sym-#{$color});
+    }
+    .active#{$delBp + $prefix + $del + $color} {
+      &.active {
+        #{$property}: var(--sym-#{$color});
+      }
+    }
+    .hover#{$delBp + $prefix + $del + $color} {
+      &:hover {
+        #{$property}: var(--sym-#{$color});
+      }
+    }
+    .dark-hover#{$delBp + $prefix + $del + $color}:hover {
+      &:is(.dark, .dark *) {
+        #{$property}: var(--sym-#{$color});
+      }
+    }
+    .dark#{$delBp + $prefix + $del + $color} {
+      &:is(.dark, .dark *) {
+        #{$property}: var(--sym-#{$color});
+      }
+    }
+  }
+}
+
+@each $color, $value in $enabled_colors {
+  $value: map.get($colors, $color);
+  @if meta.type-of($value) == map {
+    @each $shade, $hex in $value {
+      @include generate-color-utilities("text", "color", $color, $shade, $hex);
+      @include generate-color-utilities("text-dec", "text-decoration-color", $color, $shade, $hex);
+      @include generate-color-utilities("bg", "background", $color, $shade, $hex);
+      @include generate-color-utilities("bd", "border-color", $color, $shade, $hex);
+      @include generate-color-utilities("fill", "fill", $color, $shade, $hex);
+    }
+  } @else {
+    @include generate-color-utilities("text", "color", $color, null, $value);
+    @include generate-color-utilities("text-dec", "text-decoration-color", $color, null, $value);
+    @include generate-color-utilities("bg", "background", $color, null, $value);
+    @include generate-color-utilities("bd", "border-color", $color, null, $value);
+    @include generate-color-utilities("fill", "fill", $color, null, $value);
+  }
+}
+
+/// TODO gradients
+/// example:
+// .text-gradient\:x\/blue-500\/teal-500 {
+// }

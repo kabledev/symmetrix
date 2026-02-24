@@ -1,0 +1,21 @@
+@use "sass:map";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+@include generate-utility(
+  display,
+  "",
+  (
+    hide: none,
+    show: block,
+  )
+);
+
+@include generate-utility(
+  visibility,
+  "",
+  (
+    visible: visible,
+    hidden: hidden,
+  )
+);

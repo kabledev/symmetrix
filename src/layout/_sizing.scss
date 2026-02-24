@@ -1,0 +1,188 @@
+@use "sass:meta";
+@use "sass:math";
+@use "sass:map";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+$size-utilities: (
+  (
+    property: width,
+    prefix: w,
+    values: (
+      0: 0,
+      auto: auto,
+      100: 100%,
+      100vw: 100vw,
+      min: min-content,
+      max: max-content,
+      fit: fit-content,
+    ),
+    responsive: true,
+    include-box-sizes: true,
+  ),
+  (
+    property: height,
+    prefix: h,
+    values: (
+      0: 0,
+      auto: auto,
+      100: 100%,
+      100vh: 100vh,
+      75vh: 75vh,
+      50vh: 50vh,
+      min: min-content,
+      max: max-content,
+      fit: fit-content,
+    ),
+    responsive: true,
+    include-box-sizes: true,
+  ),
+  (
+    property: min-height,
+    prefix: min-h,
+    values: (
+      0: 0,
+      auto: auto,
+      100: 100%,
+      100vh: 100vh,
+      75vh: 75vh,
+      50vh: 50vh,
+      min: min-content,
+      max: max-content,
+      fit: fit-content,
+    ),
+    responsive: true,
+    include-box-sizes: true,
+  ),
+  (
+    property: max-width,
+    prefix: max-w,
+    values: (
+      0: 0,
+      100: 100%,
+      100vw: 100vw,
+      min: min-content,
+      max: max-content,
+      fit: fit-content,
+    ),
+    responsive: true,
+    include-box-sizes: true,
+  ),
+  (
+    property: min-width,
+    prefix: min-w,
+    values: (
+      0: 0,
+      100: 100%,
+      100vw: 100vw,
+      min: min-content,
+      max: max-content,
+      fit: fit-content,
+    ),
+    responsive: true,
+    include-box-sizes: true,
+  ),
+  (
+    property: size,
+    prefix: size,
+    values: (),
+    responsive: true,
+    include-box-sizes: true,
+    is-composite: true,
+  )
+);
+
+// Utility generator
+@mixin generate-size-utilities($utilities) {
+  @each $utility in $utilities {
+    $property: map.get($utility, "property");
+    $prefix: map.get($utility, "prefix");
+    $values: map.get($utility, "values");
+    $is-responsive: map.get($utility, responsive);
+    $include-box-sizes: map.get($utility, include-box-sizes);
+    $is-composite: map.get($utility, is-composite);
+
+    //  utility classes
+    @if $values {
+      @each $key, $value in $values {
+        .#{$prefix}#{$del}#{$key} {
+          @if $is-composite {
+            width: $value;
+            height: $value;
+          } @else {
+            #{$property}: $value;
+          }
+        }
+      }
+    }
+
+    // Box sizes
+    @if $include-box-sizes {
+      @each $key, $val in $box-sizes {
+        .#{$prefix}#{$del}#{$key} {
+          @if $is-composite {
+            width: $val;
+            height: $val;
+          } @else {
+            #{$property}: $val;
+          }
+        }
+      }
+    }
+
+    // Responsive
+    @if $is-responsive {
+      @each $bp, $value in $breakpoints {
+        @media (min-width: $value) {
+          @if $values {
+            @each $key, $val in $values {
+              .#{$bp}#{$delBp}#{$prefix}#{$del}#{$key} {
+                @if $is-composite {
+                  width: $val;
+                  height: $val;
+                } @else {
+                  #{$property}: $val;
+                }
+              }
+            }
+          }
+
+          @if $include-box-sizes {
+            @each $key, $val in $box-sizes {
+              .#{$bp}#{$delBp}#{$prefix}#{$del}#{$key} {
+                @if $is-composite {
+                  width: $val;
+                  height: $val;
+                } @else {
+                  #{$property}: $val;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin generate-fractional-widths {
+  @for $i from 1 through 12 {
+    .w#{$del}#{$i}\/12 {
+      //width: calc((100% * #{$i} / 12) - cacl(var(--sym-gap) / 2));
+      width: calc((#{$i} / 12 * 100%) - (var(--sym-gap) / 2));
+    }
+
+    @each $bp, $value in $breakpoints {
+      @media (min-width: $value) {
+        .#{$bp}#{$delBp}w#{$del}#{$i}\/12 {
+          //width: calc((100% * #{$i} / 12) - var(--sym-gap));
+          width: calc((#{$i} / 12 * 100%) - (var(--sym-gap) / 2));
+        }
+      }
+    }
+  }
+}
+
+// generate all
+@include generate-size-utilities($size-utilities);
+@include generate-fractional-widths;

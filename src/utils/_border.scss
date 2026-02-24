@@ -1,0 +1,49 @@
+@use "sass:map";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+@for $i from 1 through 6 {
+  .bd#{$del + $i} {
+    border-width: #{$i}px;
+  }
+  .bd#{$del + "b" + $i} {
+    border-bottom-width: #{$i}px;
+  }
+  .bd#{$del + "t" + $i} {
+    border-top-width: #{$i}px;
+  }
+  .bd#{$del + "l" + $i},
+  .bd#{$del + "s" + $i} {
+    border-left-width: #{$i}px;
+  }
+  .bd#{$del + "r" + $i},
+  .bd#{$del + "e" + $i} {
+    border-right-width: #{$i}px;
+  }
+}
+
+.bd#{$del}solid {
+  border-style: solid;
+}
+.bd#{$del}none {
+  border: none;
+}
+
+/// rounds
+$round_aliases: (
+  "tl": "border-top-left-radius",
+  "tr": "border-top-right-radius",
+  "bl": "border-bottom-left-radius",
+  "br": "border-bottom-right-radius",
+);
+
+@each $round, $value in $rounds {
+  .round#{$del + $round} {
+    border-radius: $value;
+  }
+  @each $alias, $property in $round_aliases {
+    .round#{$del + $alias + "-" + $round} {
+      #{$property}: $value;
+    }
+  }
+}

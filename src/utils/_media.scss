@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "sass:math";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+.fit#{$del}contain {
+  object-fit: contain;
+}
+.fit#{$del}contain\! {
+  object-fit: contain !important;
+}
+
+.fit#{$del}cover {
+  object-fit: cover;
+}

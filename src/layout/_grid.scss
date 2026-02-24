@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "../abstracts/vars" as *;
+
+// Grid Container
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+
+  @for $i from 1 through 12 {
+    &.cols#{$del + $i} {
+      grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+    }
+    &.rows#{$del + $i} {
+      grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+    }
+  }
+
+  @each $bp, $value in $breakpoints {
+    @media (min-width: $value) {
+      @for $i from 1 through 12 {
+        &.#{$bp + $delBp}cols#{$del + $i} {
+          grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+        }
+        &.#{$bp + $delBp}rows#{$del + $i} {
+          grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+        }
+      }
+    }
+  }
+
+  @for $i from 1 through 12 {
+    > .col-span#{$del + $i} {
+      grid-column: span #{$i};
+    }
+    > .row-span#{$del + $i} {
+      grid-row: span #{$i};
+    }
+  }
+
+  @each $bp, $val in $breakpoints {
+    @media (min-width: $val) {
+      @for $i from 1 through 12 {
+        > .#{$bp + $delBp}col-span#{$del + $i} {
+          grid-column: span #{$i};
+        }
+        > .#{$bp + $delBp}row-span#{$del + $i} {
+          grid-row: span #{$i};
+        }
+      }
+    }
+  }
+}

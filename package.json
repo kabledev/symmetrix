@@ -1,0 +1,33 @@
+{
+  "name": "symmetrix",
+  "version": "0.2.20",
+  "type": "module",
+  "description": "A lightweight Sass-based CSS framework with practical utility classes",
+  "main": "./src/symmetrix.scss",
+  "style": "./src/symmetrix.scss",
+  "exports": {
+    ".": "./src/symmetrix.scss",
+    "./abstracts": "./src/abstracts/index.scss",
+    "./base": "./src/base/index.scss",
+    "./layout": "./src/layout/index.scss",
+    "./elements": "./src/elements/index.scss",
+    "./utils": "./src/utils/index.scss"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "example": "sass example/style.scss example/style.css --watch"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "css",
+    "utility",
+    "framework"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}

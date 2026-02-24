@@ -1,0 +1,67 @@
+@use "sass:map";
+@use "../abstracts/vars" as *;
+@use "../abstracts/mixins" as *;
+
+@include generate-utility(
+  display,
+  "",
+  (
+    block: block,
+    inline-block: inline-block,
+    flex: flex,
+    inline-flex: inline-flex,
+    grid: grid,
+  )
+);
+@include generate-utility(
+  display,
+  "d",
+  (
+    none: none,
+    block: block,
+    flex: flex,
+    grid: grid,
+  )
+);
+
+@include generate-utility(
+  position,
+  "",
+  (
+    relative: relative,
+    absolute: absolute,
+    sticky: sticky,
+    fixed: fixed,
+  )
+);
+
+@include generate-utility(
+  overflow,
+  "overflow",
+  (
+    auto: auto,
+    hidden: hidden,
+    scroll: scroll,
+    visible: visible,
+  )
+);
+@include generate-utility(
+  overflow-x,
+  "overflow-x",
+  (
+    auto: auto,
+    hidden: hidden,
+    scroll: scroll,
+    visible: visible,
+  )
+);
+@include generate-utility(
+  overflow-y,
+  "overflow-y",
+  (
+    auto: auto,
+    hidden: hidden,
+    scroll: scroll,
+    visible: visible,
+  )
+);
